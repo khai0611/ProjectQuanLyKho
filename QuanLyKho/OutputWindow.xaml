@@ -1,0 +1,273 @@
+﻿<Window x:Class="QuanLyKho.OutputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyKho"
+        mc:Ignorable="d"
+        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+         xmlns:uc="clr-namespace:QuanLyKho.UserControlQLK"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="15"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+            ResizeMode="NoResize"
+            WindowStyle="None"
+            WindowStartupLocation="CenterScreen"
+            x:Name="window"
+        DataContext="{StaticResource OutputVM}"
+        
+        Title="Xuất kho" Height="650" Width="1250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--các element binding từ selected item-->
+            <materialDesign:Card Grid.Row="0" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Label  Margin="5 5 15 5" Content="Hóa đơn"></Label>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="600"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Label Margin="5 5 2 5" Content="Tên khách hàng"></Label>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Label Margin="5 5 15 5" Content="Số điện thoại"></Label>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Label Margin="5 5 15 5" Content="Địa chỉ"></Label>
+                                </Grid>
+                                <Grid Grid.Row="3">
+                                    <Label Margin="5 5 15 5" Content="Ghi chú"></Label>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <ComboBox Margin="7,-10,6,22" DisplayMemberPath="DisplayName" ItemsSource="{Binding Customer}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên khách hàng" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <TextBox Margin="7,-10,0,25" Text="{Binding SelectedCustomer.Phone, UpdateSourceTrigger=PropertyChanged}"  materialDesign:HintAssist.Hint="Số điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <TextBox Margin="7,-10,20,20" Text="{Binding SelectedCustomer.Address, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                </Grid>
+                                <Grid Grid.Row="3">
+                                    <TextBox Margin="7,-10,20,20" Text="{Binding SelectedItem.Status, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Ghi chú" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Label Margin="5 5 15 5" Content="Nhân viên"></Label>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Label Margin="5 5 15 5" Content="Ngày lập"></Label>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Label Margin="5,12,12,-1" Content="Mã phiếu xuất"></Label>
+                                </Grid>
+                                <Button Grid.Row="3" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                                            Width="120" Margin="0 0 0 10"
+                                            Content="In phiếu xuất" 
+                                            Command="{Binding PrintCommand}" 
+                                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <ComboBox Margin="0,-8,0,23" DisplayMemberPath="DisplayName" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên nhân viên" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <DatePicker VerticalAlignment="Bottom" SelectedDate="{Binding DateOutput, Mode=TwoWay}" Width="100" Margin="0,-9,20,23" materialDesign:HintAssist.Hint="Ngày lập" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Label FontSize="20" FontWeight="Bold" Margin="0,0,20,10" Content="{Binding Id, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Mã hóa đơn" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+
+            <!--Danh sách chi tiết hóa đơn-->
+            <materialDesign:Card Grid.Row="1" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="590"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <!--<materialDesign:Card Margin="5" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+                            </materialDesign:Card>-->
+                            <Label  Margin="5 5 15 5" Content="Danh sách chi tiết hóa đơn"></Label>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <WrapPanel>
+                                <ComboBox Margin="20 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Object}" SelectedItem="{Binding SelectedObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên sản phẩm" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                                <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Số lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                <TextBox Text="{Binding SelectedOutputInfo.Status, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Ghi chú" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            </WrapPanel>
+                        </Grid>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="590"></ColumnDefinition>
+                            <ColumnDefinition Width="595"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="250"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <materialDesign:Card Margin="5" VerticalAlignment="Stretch" Grid.Row="0">
+                                <ListView ItemsSource="{Binding ListOutput}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Mã HĐ" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                            <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding Customer.DisplayName}"></GridViewColumn>
+                                            <GridViewColumn Header="Ngày lập" DisplayMemberBinding="{Binding DateOutput, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                            <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding Total}"></GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedItemListViewChangedCommand}"
+                                    CommandParameter="{Binding ElementName=ListOutput}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListView>
+                            </materialDesign:Card>
+                            <Grid Grid.Row="1">
+                                <WrapPanel>
+                                    <Button Command="{Binding AddCommand}" Content="Thêm phiếu xuất" Margin="5" Width="150"></Button>
+                                    <Button Command="{Binding EditCommand}" Content="Sửa phiếu xuất" Margin="5" Width="150"></Button>
+                                    <Button Command="{Binding DeleteCommand}" Content="Xóa phiếu xuất" Margin="5" Width="150"></Button>
+                                </WrapPanel>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="250"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <materialDesign:Card Grid.Row="0" Margin="5" VerticalAlignment="Stretch">
+                                <ListView ItemsSource="{Binding ListOutputInfo}" SelectedItem="{Binding SelectedOutputInfo, Mode=TwoWay}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Tên sản phẩm" DisplayMemberBinding="{Binding Object.DisplayName}"></GridViewColumn>
+                                            <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
+                                            <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding InputInfo.InputPrice}"></GridViewColumn>
+                                            <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding SumPrice}"></GridViewColumn>
+                                            <GridViewColumn Header="Ghi chú" DisplayMemberBinding="{Binding Status}"></GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedOutputInfoListViewChangedCommand}"
+                                                                       CommandParameter="{Binding ElementName= ListOutputInfo}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListView>
+                            </materialDesign:Card>
+                            <Grid Grid.Row="1">
+                                <WrapPanel>
+                                    <Button Command="{Binding AddOuputInfoCommand}" Content="Thêm sản phẩm" Margin="5" Width="150"></Button>
+                                    <Button Command="{Binding EditOuputInfoCommand}" Content="Sửa sản phẩm" Margin="5" Width="150"></Button>
+                                    <Button Command="{Binding DeleteOuputInfoCommand}" Content="Xóa sản phẩm" Margin="5" Width="150"></Button>
+                                </WrapPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <!--<Grid Grid.Column="0">
+                        <WrapPanel>
+                            <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="120"></Button>
+                            <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="120"></Button>
+                            <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="120"></Button>
+                        </WrapPanel>
+                    </Grid>-->
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>

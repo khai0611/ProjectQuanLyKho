@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLyKho1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContractDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Output" Relationship="Self.FK__Output__IdCustom__6383C8BA" FromRole="Customer" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="Input">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateInput" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="InputInfo" Relationship="Self.FK__InputInfo__IdInp__5FB337D6" FromRole="Input" ToRole="InputInfo" />
+  </EntityType>
+  <EntityType Name="InputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdObject" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdInput" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="InputPrice" Type="Double" />
+    <Property Name="OutputPrice" Type="Double" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Input" Relationship="Self.FK__InputInfo__IdInp__5FB337D6" FromRole="InputInfo" ToRole="Input" />
+    <NavigationProperty Name="Object" Relationship="Self.FK__InputInfo__IdObj__5EBF139D" FromRole="InputInfo" ToRole="Object" />
+    <NavigationProperty Name="OutputInfo" Relationship="Self.FK__OutputInf__IdInp__6B24EA82" FromRole="InputInfo" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="Object">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdUnit" Type="Int32" Nullable="false" />
+    <Property Name="IdSuplier" Type="Int32" Nullable="false" />
+    <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InputInfo" Relationship="Self.FK__InputInfo__IdObj__5EBF139D" FromRole="Object" ToRole="InputInfo" />
+    <NavigationProperty Name="Unit" Relationship="Self.FK__Object__BarCode__4F7CD00D" FromRole="Object" ToRole="Unit" />
+    <NavigationProperty Name="Suplier" Relationship="Self.FK__Object__IdSuplie__5070F446" FromRole="Object" ToRole="Suplier" />
+    <NavigationProperty Name="OutputInfo" Relationship="Self.FK__OutputInf__IdObj__6A30C649" FromRole="Object" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="Output">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="IdPromotion" Type="Int32" />
+    <Property Name="DateOutput" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Double" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Output__IdCustom__6383C8BA" FromRole="Output" ToRole="Customer" />
+    <NavigationProperty Name="Promotion" Relationship="Self.FK__Output__IdPromot__656C112C" FromRole="Output" ToRole="Promotion" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Output__IdUser__6477ECF3" FromRole="Output" ToRole="Users" />
+    <NavigationProperty Name="OutputInfo" Relationship="Self.FK__OutputInf__IdOut__693CA210" FromRole="Output" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="OutputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdOutput" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdObject" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdInputInfo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SumPrice" Type="Double" />
+    <NavigationProperty Name="InputInfo" Relationship="Self.FK__OutputInf__IdInp__6B24EA82" FromRole="OutputInfo" ToRole="InputInfo" />
+    <NavigationProperty Name="Object" Relationship="Self.FK__OutputInf__IdObj__6A30C649" FromRole="OutputInfo" ToRole="Object" />
+    <NavigationProperty Name="Output" Relationship="Self.FK__OutputInf__IdOut__693CA210" FromRole="OutputInfo" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="PromotionalValue" Type="Double" />
+    <NavigationProperty Name="Output" Relationship="Self.FK__Output__IdPromot__656C112C" FromRole="Promotion" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="Suplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContractDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Object" Relationship="Self.FK__Object__IdSuplie__5070F446" FromRole="Suplier" ToRole="Object" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Object" Relationship="Self.FK__Object__BarCode__4F7CD00D" FromRole="Unit" ToRole="Object" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__IdRole__5812160E" FromRole="UserRole" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Output" Relationship="Self.FK__Output__IdUser__6477ECF3" FromRole="Users" ToRole="Output" />
+    <NavigationProperty Name="UserRole" Relationship="Self.FK__Users__IdRole__5812160E" FromRole="Users" ToRole="UserRole" />
+  </EntityType>
+  <Association Name="FK__Output__IdCustom__6383C8BA">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IdCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__IdInp__5FB337D6">
+    <End Role="Input" Type="Self.Input" Multiplicity="1" />
+    <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Input">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdInput" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__IdObj__5EBF139D">
+    <End Role="Object" Type="Self.Object" Multiplicity="1" />
+    <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__IdInp__6B24EA82">
+    <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="1" />
+    <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InputInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdInputInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Object__BarCode__4F7CD00D">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Object" Type="Self.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="IdUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Object__IdSuplie__5070F446">
+    <End Role="Suplier" Type="Self.Suplier" Multiplicity="1" />
+    <End Role="Object" Type="Self.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="IdSuplier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__IdObj__6A30C649">
+    <End Role="Object" Type="Self.Object" Multiplicity="1" />
+    <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Output__IdPromot__656C112C">
+    <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Promotion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IdPromotion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Output__IdUser__6477ECF3">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__IdOut__693CA210">
+    <End Role="Output" Type="Self.Output" Multiplicity="1" />
+    <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Output">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdOutput" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__IdRole__5812160E">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuanLyKho1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="Input" EntityType="Self.Input" />
+    <EntitySet Name="InputInfo" EntityType="Self.InputInfo" />
+    <EntitySet Name="Object" EntityType="Self.Object" />
+    <EntitySet Name="Output" EntityType="Self.Output" />
+    <EntitySet Name="OutputInfo" EntityType="Self.OutputInfo" />
+    <EntitySet Name="Promotion" EntityType="Self.Promotion" />
+    <EntitySet Name="Suplier" EntityType="Self.Suplier" />
+    <EntitySet Name="Unit" EntityType="Self.Unit" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__Output__IdCustom__6383C8BA" Association="Self.FK__Output__IdCustom__6383C8BA">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Output" EntitySet="Output" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__IdInp__5FB337D6" Association="Self.FK__InputInfo__IdInp__5FB337D6">
+      <End Role="Input" EntitySet="Input" />
+      <End Role="InputInfo" EntitySet="InputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__IdObj__5EBF139D" Association="Self.FK__InputInfo__IdObj__5EBF139D">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="InputInfo" EntitySet="InputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__IdInp__6B24EA82" Association="Self.FK__OutputInf__IdInp__6B24EA82">
+      <End Role="InputInfo" EntitySet="InputInfo" />
+      <End Role="OutputInfo" EntitySet="OutputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Object__BarCode__4F7CD00D" Association="Self.FK__Object__BarCode__4F7CD00D">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Object" EntitySet="Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Object__IdSuplie__5070F446" Association="Self.FK__Object__IdSuplie__5070F446">
+      <End Role="Suplier" EntitySet="Suplier" />
+      <End Role="Object" EntitySet="Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__IdObj__6A30C649" Association="Self.FK__OutputInf__IdObj__6A30C649">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="OutputInfo" EntitySet="OutputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Output__IdPromot__656C112C" Association="Self.FK__Output__IdPromot__656C112C">
+      <End Role="Promotion" EntitySet="Promotion" />
+      <End Role="Output" EntitySet="Output" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Output__IdUser__6477ECF3" Association="Self.FK__Output__IdUser__6477ECF3">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Output" EntitySet="Output" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__IdOut__693CA210" Association="Self.FK__OutputInf__IdOut__693CA210">
+      <End Role="Output" EntitySet="Output" />
+      <End Role="OutputInfo" EntitySet="OutputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__IdRole__5812160E" Association="Self.FK__Users__IdRole__5812160E">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
