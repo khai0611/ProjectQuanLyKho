@@ -23,18 +23,17 @@ namespace QuanLyKho.Model
         }
     
         public string Id { get; set; }
-
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
-        public int IdUnit { get; set; }
-        public int IdSupplier { get; set; }
 
         private string _QRCode;
         public string QRCode { get => _QRCode; set { _QRCode = value; OnPropertyChanged(); } }
 
         private string _BarCode;
         public string BarCode { get => _BarCode; set { _BarCode = value; OnPropertyChanged(); } }
-
+        public int IdUnit { get; set; }
+        public int IdSupplier { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InputInfo> InputInfo { get; set; }
         public virtual Unit Unit { get; set; }

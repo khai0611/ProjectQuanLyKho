@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="QuanLyKho3ModelStoreContainer" CdmEntityContainer="QuanLyKho3Entities">
+  <EntityContainerMapping StorageEntityContainer="QuanLyKho00ModelStoreContainer" CdmEntityContainer="QuanLyKho00Entities1">
     <EntitySetMapping Name="Customer">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Customer">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Customer">
         <MappingFragment StoreEntitySet="Customer">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -15,7 +15,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Input">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Input">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Input">
         <MappingFragment StoreEntitySet="Input">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DateInput" ColumnName="DateInput" />
@@ -23,7 +23,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InputInfo">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.InputInfo">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.InputInfo">
         <MappingFragment StoreEntitySet="InputInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdObject" ColumnName="IdObject" />
@@ -36,7 +36,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Object">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Object">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Object">
         <MappingFragment StoreEntitySet="Object">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -48,7 +48,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Output">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Output">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Output">
         <MappingFragment StoreEntitySet="Output">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
@@ -61,7 +61,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OutputInfo">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.OutputInfo">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.OutputInfo">
         <MappingFragment StoreEntitySet="OutputInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdOutput" ColumnName="IdOutput" />
@@ -74,7 +74,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Promotion">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Promotion">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Promotion">
         <MappingFragment StoreEntitySet="Promotion">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -85,7 +85,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Supplier">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Supplier">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -97,8 +97,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Unit">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Unit">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Unit">
         <MappingFragment StoreEntitySet="Unit">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -106,7 +117,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserRole">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.UserRole">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.UserRole">
         <MappingFragment StoreEntitySet="UserRole">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -114,7 +125,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="QuanLyKho3Model.Users">
+      <EntityTypeMapping TypeName="QuanLyKho00Model.Users">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />

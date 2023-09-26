@@ -34,7 +34,6 @@ D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\UnitWindow.g.cs
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\UnitWindow.baml
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\SupplierWindow.g.cs
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\SupplierWindow.baml
-D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.csproj.SuggestedBindingRedirects.cache
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\CustomerWindow.g.cs
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\CustomerWindow.baml
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\ObjectWindow.g.cs
@@ -54,3 +53,7 @@ D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\InputInfoWindow.g.cs
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\InputInfoWindow.baml
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\OutputInfoWindow.g.cs
 D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\OutputInfoWindow.baml
+D:\Do An\QuanLyKho\QuanLyKho\bin\Debug\itextsharp.dll
+D:\Do An\QuanLyKho\QuanLyKho\bin\Debug\itextsharp.xml
+D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\PrintWindow.g.cs
+D:\Do An\QuanLyKho\QuanLyKho\obj\Debug\PrintWindow.baml

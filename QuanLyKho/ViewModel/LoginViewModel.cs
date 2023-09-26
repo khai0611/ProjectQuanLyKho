@@ -49,7 +49,7 @@ namespace QuanLyKho.ViewModel
             else
             {
                 IsLogin = false;
-                MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu");
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu");
             }
 
         }
@@ -74,4 +74,3 @@ namespace QuanLyKho.ViewModel
         }
     }
 }
-

@@ -9,11 +9,10 @@
 
 namespace QuanLyKho.Model
 {
-    using QuanLyKho.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Users : BaseViewModel
+    public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
@@ -25,10 +24,8 @@ namespace QuanLyKho.Model
         public string DisplayName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-
-        private int _IdRole;
-        public int IdRole { get => _IdRole; set { _IdRole = value; OnPropertyChanged(); } }
-
+        public int IdRole { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Output> Output { get; set; }
         public virtual UserRole UserRole { get; set; }

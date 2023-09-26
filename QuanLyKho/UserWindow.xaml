@@ -57,7 +57,7 @@
                     <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="100"></Button>
                     <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="100"></Button>
                     <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="100"></Button>
-                    <Button Command="{Binding ChangePasswordCommand}" Content="Đổi mật khẩu" Margin="5" Width="120"></Button>
+                    <!--<Button Command="{Binding ChangePasswordCommand}" Content="Đổi mật khẩu" Margin="5" Width="120"></Button>-->
                 </WrapPanel>
             </materialDesign:Card>
 

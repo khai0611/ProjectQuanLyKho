@@ -22,7 +22,6 @@ namespace QuanLyKho.Model
         }
     
         public int Id { get; set; }
-
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
 
@@ -38,8 +37,8 @@ namespace QuanLyKho.Model
         private string _MoreInfo;
         public string MoreInfo { get => _MoreInfo; set { _MoreInfo = value; OnPropertyChanged(); } }
 
-        private Nullable<System.DateTime> _ContractDate;
-        public Nullable<System.DateTime> ContractDate { get => _ContractDate; set { _ContractDate = value; OnPropertyChanged(); } }
+        private DateTime? _ContractDate;
+        public DateTime? ContractDate { get => _ContractDate; set { _ContractDate = value; OnPropertyChanged(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Output> Output { get; set; }

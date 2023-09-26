@@ -22,17 +22,18 @@
             x:Name="window"
         DataContext="{StaticResource OutputVM}"
         
-        Title="Xuất kho" Height="650" Width="1250">
+        Title="Xuất kho" Height="700" Width="1250">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="301*"></RowDefinition>
+            <RowDefinition Height="362*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -48,7 +49,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <Label  Margin="5 5 15 5" Content="Hóa đơn"></Label>
+                        <Label  Margin="5 5 15 5" Content="Phiếu xuất kho"></Label>
                     </Grid>
 
                     <Grid Grid.Row="1">
@@ -69,16 +70,16 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <Label Margin="5 5 2 5" Content="Tên khách hàng"></Label>
+                                    <Label Margin="5 7 2 5" Content="Tên khách hàng"></Label>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <Label Margin="5 5 15 5" Content="Số điện thoại"></Label>
+                                    <Label Margin="5 8 15 5" Content="Số điện thoại"></Label>
                                 </Grid>
                                 <Grid Grid.Row="2">
-                                    <Label Margin="5 5 15 5" Content="Địa chỉ"></Label>
+                                    <Label Margin="5 10 15 5" Content="Địa chỉ"></Label>
                                 </Grid>
                                 <Grid Grid.Row="3">
-                                    <Label Margin="5 5 15 5" Content="Ghi chú"></Label>
+                                    <Label Margin="5 10 15 5" Content="Ghi chú"></Label>
                                 </Grid>
                             </Grid>
                             <Grid Grid.Column="1">
@@ -92,16 +93,15 @@
                                     <ComboBox Margin="7,-10,6,22" DisplayMemberPath="DisplayName" ItemsSource="{Binding Customer}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên khách hàng" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <TextBox Margin="7,-10,0,25" Text="{Binding SelectedCustomer.Phone, UpdateSourceTrigger=PropertyChanged}"  materialDesign:HintAssist.Hint="Số điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                    <TextBox Margin="7,-5,0,25" Text="{Binding SelectedCustomer.Phone, UpdateSourceTrigger=PropertyChanged}"  materialDesign:HintAssist.Hint="Số điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                                 </Grid>
                                 <Grid Grid.Row="2">
-                                    <TextBox Margin="7,-10,20,20" Text="{Binding SelectedCustomer.Address, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                    <TextBox Margin="7,-7,20,20" Text="{Binding SelectedCustomer.Address, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                                 </Grid>
                                 <Grid Grid.Row="3">
-                                    <TextBox Margin="7,-10,20,20" Text="{Binding SelectedItem.Status, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Ghi chú" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                    <TextBox Margin="7,-5,20,20" Text="{Binding SelectedItem.Status, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Ghi chú" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                                 </Grid>
                             </Grid>
-
                         </Grid>
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -119,17 +119,17 @@
                                     <Label Margin="5 5 15 5" Content="Nhân viên"></Label>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <Label Margin="5 5 15 5" Content="Ngày lập"></Label>
+                                    <Label Margin="5 7 15 5" Content="Ngày lập"></Label>
                                 </Grid>
                                 <Grid Grid.Row="2">
                                     <Label Margin="5,12,12,-1" Content="Mã phiếu xuất"></Label>
                                 </Grid>
-                                <Button Grid.Row="3" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                                            Width="120" Margin="0 0 0 10"
+                                <!--<Button Grid.Row="3" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                                            Width="120" Margin="0,5,0,0"
                                             Content="In phiếu xuất" 
                                             Command="{Binding PrintCommand}" 
-                                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                                </Button>
+                                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Height="32" VerticalAlignment="Top" Click="Button_Click">
+                                </Button>-->
                             </Grid>
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
@@ -142,7 +142,7 @@
                                     <ComboBox Margin="0,-8,0,23" DisplayMemberPath="DisplayName" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên nhân viên" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <DatePicker VerticalAlignment="Bottom" SelectedDate="{Binding DateOutput, Mode=TwoWay}" Width="100" Margin="0,-9,20,23" materialDesign:HintAssist.Hint="Ngày lập" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                    <DatePicker VerticalAlignment="Bottom" SelectedDate="{Binding DateOutput, Mode=TwoWay}" Width="100" Margin="0,-7,20,23" materialDesign:HintAssist.Hint="Ngày lập" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                                 </Grid>
                                 <Grid Grid.Row="2">
                                     <Label FontSize="20" FontWeight="Bold" Margin="0,0,20,10" Content="{Binding Id, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Mã hóa đơn" />
@@ -152,7 +152,6 @@
                     </Grid>
                 </Grid>
             </materialDesign:Card>
-
             <!--Danh sách chi tiết hóa đơn-->
             <materialDesign:Card Grid.Row="1" Margin="5">
                 <Grid>
@@ -160,31 +159,25 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="590"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <!--<materialDesign:Card Margin="5" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                            </materialDesign:Card>-->
-                            <Label  Margin="5 5 15 5" Content="Danh sách chi tiết hóa đơn"></Label>
+                            <Label  Margin="5 5 15 5" Content="Danh sách chi tiết" FontSize="18"></Label>
                         </Grid>
                         <Grid Grid.Column="1">
                             <WrapPanel>
-                                <ComboBox Margin="20 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Object}" SelectedItem="{Binding SelectedObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên sản phẩm" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                                <ComboBox Margin="80 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Object}" SelectedItem="{Binding SelectedObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên sản phẩm" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
                                 <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Số lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                                <TextBox Text="{Binding SelectedOutputInfo.Status, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Ghi chú" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             </WrapPanel>
                         </Grid>
-
                     </Grid>
-
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="590"></ColumnDefinition>
-                            <ColumnDefinition Width="595"></ColumnDefinition>
+                            <ColumnDefinition Width="650"></ColumnDefinition>
+                            <ColumnDefinition Width="600"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
@@ -199,6 +192,7 @@
                                             <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding Customer.DisplayName}"></GridViewColumn>
                                             <GridViewColumn Header="Ngày lập" DisplayMemberBinding="{Binding DateOutput, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                             <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding Total}"></GridViewColumn>
+                                            <GridViewColumn Header="Ghi chú" DisplayMemberBinding="{Binding Status, Mode=OneTime}"></GridViewColumn>
                                         </GridView>
                                     </ListView.View>
                                     <i:Interaction.Triggers>
@@ -228,9 +222,8 @@
                                         <GridView>
                                             <GridViewColumn Header="Tên sản phẩm" DisplayMemberBinding="{Binding Object.DisplayName}"></GridViewColumn>
                                             <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
-                                            <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding InputInfo.InputPrice}"></GridViewColumn>
+                                            <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding InputInfo.OutputPrice}"></GridViewColumn>
                                             <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding SumPrice}"></GridViewColumn>
-                                            <GridViewColumn Header="Ghi chú" DisplayMemberBinding="{Binding Status}"></GridViewColumn>
                                         </GridView>
                                     </ListView.View>
                                     <i:Interaction.Triggers>
@@ -252,20 +245,12 @@
                     </Grid>
                 </Grid>
             </materialDesign:Card>
-
             <materialDesign:Card Grid.Row="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="400"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <!--<Grid Grid.Column="0">
-                        <WrapPanel>
-                            <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="120"></Button>
-                            <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="120"></Button>
-                            <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="120"></Button>
-                        </WrapPanel>
-                    </Grid>-->
                 </Grid>
             </materialDesign:Card>
         </Grid>

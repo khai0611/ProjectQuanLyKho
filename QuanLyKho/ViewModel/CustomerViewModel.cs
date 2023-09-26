@@ -74,6 +74,12 @@ namespace QuanLyKho.ViewModel
 
         private string _Email;
         public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
+
+        private string _MoreInfo;
+        public string MoreInfo { get => _MoreInfo; set { _MoreInfo = value; OnPropertyChanged(); } }
+
+        private DateTime? _ContractDate;
+        public DateTime? ContractDate { get => _ContractDate; set { _ContractDate = value; OnPropertyChanged(); } }
         private Model.Customer _SelectedCustomer;
         public Model.Customer SelectedCustomer
         {
@@ -82,16 +88,8 @@ namespace QuanLyKho.ViewModel
             {
                 _SelectedCustomer = value;
                 OnPropertyChanged();
-
-
             }
         }
-
-        private string _MoreInfo;
-        public string MoreInfo { get => _MoreInfo; set { _MoreInfo = value; OnPropertyChanged(); } }
-
-        private DateTime? _ContractDate;
-        public DateTime? ContractDate { get => _ContractDate; set { _ContractDate = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -105,6 +103,9 @@ namespace QuanLyKho.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
+                if (DisplayName == null || Address == null || Phone == null)
+                    return false;
+                
                 return true;
 
             }, (p) =>
@@ -171,7 +172,6 @@ namespace QuanLyKho.ViewModel
                                 DataProvider.Ins.DB.OutputInfo.Remove(i);
                                 ListOutputInfo.Remove(i);
                             }
-
                         }
                     }
                     DataProvider.Ins.DB.Output.Remove(item);

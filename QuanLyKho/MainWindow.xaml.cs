@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyKho.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,16 @@ namespace QuanLyKho
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //public ICommand ObjectCommand { get; set; }
+        //public ICommand OutputInfoCommand { get; set; }
+        //public ICommand OutputCommand { get; set; }
+
+        //public Model.Object SelectedObject { get; set; }
     }
 }

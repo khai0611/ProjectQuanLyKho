@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace QuanLyKho.ViewModel
@@ -42,6 +44,7 @@ namespace QuanLyKho.ViewModel
         public UnitViewModel()
         {
             List = new ObservableCollection<Unit>(DataProvider.Ins.DB.Unit.ToList());
+            ICollectionView view = CollectionViewSource.GetDefaultView(List);
 
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -51,7 +54,6 @@ namespace QuanLyKho.ViewModel
                 var displayList = DataProvider.Ins.DB.Unit.Where(x => x.DisplayName == DisplayName);
                 if (displayList == null || displayList.Count() != 0)
                     return false;
-
                 return true;
 
             }, (p) =>
@@ -72,7 +74,6 @@ namespace QuanLyKho.ViewModel
                 var displayList = DataProvider.Ins.DB.Unit.Where(x => x.DisplayName == DisplayName);
                 if (displayList == null || displayList.Count() != 0)
                     return false;
-
                 return true;
 
             }, (p) =>
@@ -82,6 +83,7 @@ namespace QuanLyKho.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
 
                 SelectedItem.DisplayName = DisplayName;
+                view.Refresh();
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -99,7 +101,7 @@ namespace QuanLyKho.ViewModel
                 var unit = DataProvider.Ins.DB.Unit.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
 
                 DataProvider.Ins.DB.Unit.Remove(unit);
-                //DataProvider.Ins.DB.SaveChanges();
+                DataProvider.Ins.DB.SaveChanges();
                 List.Remove(unit);
             });
         }

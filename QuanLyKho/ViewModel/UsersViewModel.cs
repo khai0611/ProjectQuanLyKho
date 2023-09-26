@@ -67,12 +67,13 @@ namespace QuanLyKho.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedUserRole == null || UserName == null || DisplayName == null)
-                    return false;
 
-                var displayList = DataProvider.Ins.DB.Users.Where(x => x.UserName == UserName);
-                if (displayList == null || displayList.Count() != 0)
+                if (UserName == null)
                     return false;
+                
+                //var displayList = DataProvider.Ins.DB.Users.Where(x => x.UserName == UserName);
+                //if (displayList == null || displayList.Count() != 0)
+                //    return false; 
                 return true;
 
             }, (p) =>
@@ -87,11 +88,8 @@ namespace QuanLyKho.ViewModel
 
             EditCommand = new RelayCommand<Users>((p) =>
             {
-                if (UserName == null || SelectedUserRole == null)
-                    return false;
 
-                var displayList = DataProvider.Ins.DB.Users.Where(x => x.UserName == UserName);
-                if (displayList == null || displayList.Count() != 0)
+                if (SelectedItem == null)
                     return false;
 
                 return true;

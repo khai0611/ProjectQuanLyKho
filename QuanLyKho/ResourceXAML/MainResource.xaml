@@ -13,5 +13,7 @@
     <viewmodel:OutputViewModel x:Key="OutputVM"></viewmodel:OutputViewModel>
     <viewmodel:UsersViewModel x:Key="UserVM"></viewmodel:UsersViewModel>
     <viewmodel:ReportViewModel x:Key="ReportVM"></viewmodel:ReportViewModel>
+    <viewmodel:PrintViewModel x:Key="PrintVM"></viewmodel:PrintViewModel>
+    
 </ResourceDictionary>
     

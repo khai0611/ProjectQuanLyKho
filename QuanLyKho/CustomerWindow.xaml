@@ -51,7 +51,7 @@
                     <TextBox Text="{Binding MoreInfo, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Thông tin thêm" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <DatePicker SelectedDate="{Binding ContractDate, UpdateSourceTrigger=PropertyChanged}" Width="110" Margin="5 5 15 5" 
-                                materialDesign:HintAssist.Hint="Ngày hợp tác"
+                                materialDesign:HintAssist.Hint="Ngày hợp tác" 
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 </WrapPanel>
             </materialDesign:Card>

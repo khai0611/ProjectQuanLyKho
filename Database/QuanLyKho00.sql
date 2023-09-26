@@ -1,7 +1,7 @@
-﻿--create database QuanLyKho3
+﻿--create database QuanLyKho00
 --go
 
-use QuanLyKho3
+use QuanLyKho00
 go
 
 --ALTER TABLE OutputInfo
@@ -28,7 +28,7 @@ create table Supplier
 	Id int identity(1,1) primary key,
 	DisplayName nvarchar(max),
 	Address nvarchar(max),
-	Phone nvarchar(20),
+	Phone varchar(11),
 	Email nvarchar(200),
 	MoreInfo nvarchar(max),
 	ContractDate DateTime
@@ -47,7 +47,7 @@ create table Customer
 	Id int identity(1,1) primary key,
 	DisplayName nvarchar(max),
 	Address nvarchar(max),
-	Phone nvarchar(20),
+	Phone varchar(11),
 	Email nvarchar(200),
 	MoreInfo nvarchar(max),
 	ContractDate DateTime
@@ -124,8 +124,13 @@ insert into Users(DisplayName, Username, Password, IdRole) values(N'Admin', N'ad
 go
 insert into Users(DisplayName, Username, Password, IdRole) values(N'Nhân viên', N'staff', N'978aae9bb6bee8fb75de3e4830a1be46', 2)
 go
-insert into Users(DisplayName, Username, Password, IdRole) values(N'Fuwa', N'admin', N'8959c460deaab17c1fe0c1a32523cae8', 1)
+insert into Users(DisplayName, Username, Password, IdRole) values(N'Fuwa', N'admin', N'c0f3ef0aa02edc226c397c08bee3379b', 1)
 go
+insert into Users(DisplayName, Username, Password, IdRole) values(N'hiep', N'hiep123', N'29ca6a2f513d0839f918ba099a020ba7', 1)
+go
+insert into Users(DisplayName, Username, Password, IdRole) values(N'khai', N'khai12', N'76ff7543584e0401d2036c9e3c96c96b', 1)
+go
+
 
 create table Input
 (
@@ -196,11 +201,11 @@ create table OutputInfo
 )
 go
 
-insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'1', '1', '1', '1', 5, N'firstOutputInfo', 2000)
+insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'1', '1', '1', '1', 5, N'1', 2000)
 go
-insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'2', '1', '2', '2', 5, N'firstOutputInfo', 3000)
+insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'2', '1', '2', '2', 5, N'2', 3000)
 go
-insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'3', '1', '1', '2', 5, N'firstOutputInfo', 4000)
+insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'3', '1', '1', '2', 5, N'1', 4000)
 go
-insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'4', '2', '2', '2', 5, N'twoOutputInfo', 5000)
+insert into OutputInfo(Id, IdOutput, IdInputInfo, IdObject, Count, Status, SumPrice) values(N'4', '2', '2', '2', 5, N'2', 5000)
 go

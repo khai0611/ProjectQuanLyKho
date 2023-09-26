@@ -28,7 +28,7 @@ namespace QuanLyKho.ViewModel
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");
-            _canExecute = canExecute;
+            _canExecute = canExecute; //Phương thức này xác định command có thể được thực thi hay không
             _execute = execute;
         }
 

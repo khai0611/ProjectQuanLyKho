@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,11 @@ namespace QuanLyKho.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        private ObservableCollection<TonKho> _TonKhoList;
+        private ObservableCollection<TonKho> _TonKhoList; //tập hợp tương tự như List<T>, mô tả một tập hợp dữ liệu có thể thay đổi số lượng bằng các phương thức quen thuộc
         public ObservableCollection<TonKho> TonKhoList { get => _TonKhoList; set { _TonKhoList = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<Model.Object> _Object;
+        public ObservableCollection<Model.Object> Object { get => _Object; set { _Object = value; OnPropertyChanged(); } }
 
         private ThongKe _ThongKe;
         public ThongKe ThongKe { get => _ThongKe; set { _ThongKe = value; OnPropertyChanged(); } }
@@ -29,6 +33,21 @@ namespace QuanLyKho.ViewModel
 
         private DateTime? _DateEnd;
         public DateTime? DateEnd { get => _DateEnd; set { _DateEnd = value; OnPropertyChanged(); } }
+
+        private Model.Object _SelectedObject;
+        public Model.Object SelectedObject { get => _SelectedObject; set { _SelectedObject = value; OnPropertyChanged(); } }
+
+        private Model.Input _SelectedInput;
+        public Model.Input SelectedInput
+        {
+            get => _SelectedInput;
+            set
+            {
+                _SelectedInput = value;
+                OnPropertyChanged();
+
+            }
+        }
 
         public bool Isloaded = false;
         public ICommand LoadedWindowCommand { get; set; }
@@ -47,7 +66,11 @@ namespace QuanLyKho.ViewModel
         // mọi xử lý sẽ nằm trong đây
         public MainViewModel()
         {
-            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => 
+            LoadedWindowCommand = new RelayCommand<Window>((p) => 
+            { 
+                return true; 
+            }, (p) => 
+
             {
                 Isloaded= true;
                 if (p == null)
@@ -81,11 +104,15 @@ namespace QuanLyKho.ViewModel
             InputInfoCommand = new RelayCommand<object>((p) => { return true; }, (p) => { InputInfoWindow wd = new InputInfoWindow(); wd.ShowDialog(); });
             OutputInfoCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OutputInfoWindow wd = new OutputInfoWindow(); wd.ShowDialog(); });
             OutputCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OutputWindow wd = new OutputWindow(); wd.ShowDialog(); });
-
+            
             TonKhoCommand = new RelayCommand<object>((x) =>
             {
-                if (DateBeginInventory == null || DateEndInventory == null)
+                Object = new ObservableCollection<Model.Object>(DataProvider.Ins.DB.Object);
+                if (DateBeginInventory == null || DateEndInventory == null) 
+                    if(SelectedObject == null)
+
                     return false;
+
                 return true;
 
             }, (x) =>
@@ -93,12 +120,12 @@ namespace QuanLyKho.ViewModel
             {
                 TonKhoList.Clear();
                 LoadTonKhoData2();
-
             });
 
             ThongKeCommand = new RelayCommand<object>((x) =>
             {
                 return true;
+
             }, (x) =>
 
             {
@@ -121,7 +148,7 @@ namespace QuanLyKho.ViewModel
             double tongTienLai = 0;
 
             int i = 1;
-            foreach(var item in objectList)
+            foreach (var item in objectList)
             {
                 var inputList = DataProvider.Ins.DB.InputInfo.Where(p => p.IdObject == item.Id);
                 var outputList = DataProvider.Ins.DB.OutputInfo.Where(p => p.IdObject == item.Id);
@@ -150,18 +177,19 @@ namespace QuanLyKho.ViewModel
                 tongTienNhap += sumInput * tienNhap;
                 tongTienXuat += sumOutput * tienXuat;
 
-                TonKho tonkho = new TonKho();
-                tonkho.STT = i;
-                tonkho.CountInput = sumInput;
-                tonkho.CountOutput = sumOutput;
-                tonkho.CountInventory = sumInput - sumOutput;
-                tonkho.MoneyInput = sumInput * tienNhap;
-                tonkho.MoneyOutput = sumOutput * tienXuat;
-                tonkho.MoneyInventory = (sumInput - sumOutput) * tienNhap;
-                tonkho.MoneyIncome = sumOutput * (tienXuat - tienNhap);
-                tonkho.Object = item;
+                TonKho inventory = new TonKho();
 
-                TonKhoList.Add(tonkho);
+                inventory.STT = i;
+                inventory.CountInput = sumInput;
+                inventory.CountOutput = sumOutput;
+                inventory.CountInventory = sumInput - sumOutput;
+                inventory.MoneyInput = sumInput * tienNhap;
+                inventory.MoneyOutput = sumOutput * tienXuat;
+                inventory.MoneyInventory = (sumInput - sumOutput) * tienNhap;
+                inventory.MoneyIncome = sumOutput * (tienXuat - tienNhap);
+                inventory.Object = item;
+
+                TonKhoList.Add(inventory);
 
                 i++;
             }
@@ -174,15 +202,32 @@ namespace QuanLyKho.ViewModel
             ThongKe.GiaTon = tongTienTon;
             ThongKe.GiaLai = tongTienLai;
         }
+
         void LoadTonKhoData2()
         {
             TonKhoList = new ObservableCollection<TonKho>();
             ThongKe = new ThongKe();
             var objectList = DataProvider.Ins.DB.Object;
 
-            // Tạo danh sách trong ngày duyệt - mảng Input & mảng Ouput
-            var dsNhap = DataProvider.Ins.DB.Input.Where(p => (p.DateInput >= DateBeginInventory) && (p.DateInput <= DateEndInventory));
-            var dsXuat = DataProvider.Ins.DB.Output.Where(p => (p.DateOutput >= DateBeginInventory) && (p.DateOutput <= DateEndInventory));
+            // Tạo danh sách trong ngày duyệt - mảng Input & mảng Output
+
+            // Lay danh sach nhap
+            var dsNhap = DataProvider.Ins.DB.Input.AsQueryable();
+
+            // loc danh sach nhap theo ngay
+            if (DateBeginInventory != null)
+            {
+                dsNhap = DataProvider.Ins.DB.Input.Where(p => (p.DateInput >= DateBeginInventory) && (p.DateInput <= DateEndInventory));
+            } 
+
+            // lay danh sach xuat
+            var dsXuat = DataProvider.Ins.DB.Output.AsQueryable();
+
+            // loc danh sach xuat theo ngay
+            if (DateBeginInventory != null)
+            {
+                dsXuat = DataProvider.Ins.DB.Output.Where(p => (p.DateOutput >= DateBeginInventory) && (p.DateOutput <= DateEndInventory));
+            }
 
             int luongNhap = 0;
             int luongXuat = 0;
@@ -202,81 +247,88 @@ namespace QuanLyKho.ViewModel
                 double tienNhap = 0;
                 double tienXuat = 0;
 
+                TonKho inventory = new TonKho();
+                inventory.STT = i;
+                inventory.Object = item;
+
+                bool inputFound = false;
+                bool outputFound = false;
+
                 // Tìm mảng InputInfo nằm trong mảng Object và mảng Input (dsNhap)
                 foreach (var item1 in dsNhap)
                 {
-                    var inputList = DataProvider.Ins.DB.InputInfo.Where(p => (p.IdInput == item1.Id) && (p.IdObject == item.Id));
+                    IQueryable<InputInfo> inputList;
+                    if (SelectedObject != null)
+                    {
+                        inputList = DataProvider.Ins.DB.InputInfo.Where(p => (p.IdInput == item1.Id) && (p.IdObject == SelectedObject.Id) && (p.IdObject == item.Id));
+                    } 
+                    else
+                    {
+                        inputList = DataProvider.Ins.DB.InputInfo.Where(p => (p.IdInput == item1.Id) && (p.IdObject == item.Id));
+                    }
+                    
                     if (inputList != null && inputList.Count() > 0)
                     {
-                        sumInput = (int)inputList.Sum(p => p.Count);
+                        sumInput += (int)inputList.Sum(p => p.Count);
                         tienNhap = (double)inputList.Sum(p => p.InputPrice);
                         tienXuat = (double)inputList.Sum(p => p.OutputPrice);
-                        luongNhap += sumInput;
-                        tongTienNhap += sumInput * tienNhap;
 
-                        TonKho inventory = new TonKho();
-                        inventory.STT = i;
-                        inventory.CountInput = sumInput;
-                        inventory.CountOutput = sumOutput;
-                        tongTienTon += (sumInput - sumOutput) * tienNhap;
-                        tongTienLai += sumOutput * (tienXuat - tienNhap);
-
-                        inventory.CountInventory = sumInput - sumOutput;
-                        inventory.MoneyInput = sumInput * tienNhap;
-                        inventory.MoneyOutput = sumOutput * tienXuat;
-                        inventory.MoneyInventory = (sumInput - sumOutput) * tienNhap;
-                        inventory.MoneyIncome = sumOutput * (tienXuat - tienNhap);
-                        inventory.Object = item;
-
-                        TonKhoList.Add(inventory);
-
-                        i++;
+                        inputFound = true;
                     }
-                    ThongKe.LuongNhap = luongNhap;
-                    ThongKe.LuongXuat = luongXuat;
-                    ThongKe.GiaNhap = tongTienNhap;
-                    ThongKe.GiaXuat = tongTienXuat;
-                    ThongKe.LuongTon = luongNhap - luongXuat;
-                    ThongKe.GiaTon = tongTienTon;
-                    ThongKe.GiaLai = tongTienLai;
                 }
+
+                luongNhap += sumInput;
 
                 // Tìm mảng OutputInfo nằm trong mảng Object và mảng Output (dsXuat)
                 foreach (var item2 in dsXuat)
                 {
-                    var outputList = DataProvider.Ins.DB.OutputInfo.Where(p => p.IdOutput == item2.Id && (p.IdObject == item.Id));
+                    IQueryable<OutputInfo> outputList;
+                    if (SelectedObject != null)
+                    {
+                        outputList = DataProvider.Ins.DB.OutputInfo.Where(p => (p.IdOutput == item2.Id) && (p.IdObject == SelectedObject.Id) && (p.IdObject == item.Id));
+                    }
+                    else
+                    {
+                        outputList = DataProvider.Ins.DB.OutputInfo.Where(p => (p.IdOutput == item2.Id)  && (p.IdObject == item.Id));
+                    }
+                    
                     if (outputList != null && outputList.Count() > 0)
                     {
-                        sumOutput = (int)outputList.Sum(p => p.Count);
-                        tienXuat = (double)outputList.Sum(p => p.SumPrice);
+                        sumOutput += (int)outputList.Sum(p => p.Count);
 
-                        TonKho inventory = new TonKho();
-                        inventory.STT = i;
-                        inventory.CountInput = sumInput;
-                        inventory.CountOutput = sumOutput;
-                        tongTienTon += (sumInput - sumOutput) * tienNhap;
-                        tongTienLai += sumOutput * (tienXuat - tienNhap);
-
-                        inventory.CountInventory = sumInput - sumOutput;
-                        inventory.MoneyInput = sumInput * tienNhap;
-                        inventory.MoneyOutput = sumOutput * tienXuat;
-                        inventory.MoneyInventory = (sumInput - sumOutput) * tienNhap;
-                        inventory.MoneyIncome = sumOutput * (tienXuat - tienNhap);
-                        inventory.Object = item;
-
-                        TonKhoList.Add(inventory);
-
-                        i++;
+                        outputFound = true;
                     }
-                    ThongKe.LuongNhap = luongNhap;
-                    ThongKe.LuongXuat = luongXuat;
-                    ThongKe.GiaNhap = tongTienNhap;
-                    ThongKe.GiaXuat = tongTienXuat;
-                    ThongKe.LuongTon = luongNhap - luongXuat;
-                    ThongKe.GiaTon = tongTienTon;
-                    ThongKe.GiaLai = tongTienLai;
+                }
+
+                luongXuat += sumOutput;
+
+                if (inputFound || outputFound)
+                {
+                    inventory.CountInput = sumInput;
+                    inventory.CountOutput = sumOutput;
+                    inventory.CountInventory = sumInput - sumOutput;
+                    inventory.MoneyInput = sumInput * tienNhap;
+                    inventory.MoneyOutput = sumOutput * tienXuat;
+                    inventory.MoneyInventory = (sumInput - sumOutput) * tienNhap;
+                    inventory.MoneyIncome = sumOutput * (tienXuat - tienNhap);
+
+                    tongTienTon += (sumInput - sumOutput) * tienNhap;
+                    tongTienLai += sumOutput * (tienXuat - tienNhap);
+                    tongTienNhap += sumInput * tienNhap;
+                    tongTienXuat += sumOutput * tienXuat;
+
+                    TonKhoList.Add(inventory);
+                    i++;
                 }
             }
+
+            ThongKe.LuongNhap = luongNhap;
+            ThongKe.LuongXuat = luongXuat;
+            ThongKe.GiaNhap = tongTienNhap;
+            ThongKe.GiaXuat = tongTienXuat;
+            ThongKe.LuongTon = luongNhap - luongXuat;
+            ThongKe.GiaTon = tongTienTon;
+            ThongKe.GiaLai = tongTienLai;
         }
     }
 }

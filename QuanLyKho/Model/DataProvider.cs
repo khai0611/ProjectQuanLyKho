@@ -23,11 +23,11 @@ namespace QuanLyKho.Model
             } 
         }
 
-        public QuanLyKho3Entities DB { get; set; }
+        public QuanLyKho00Entities1 DB { get; set; }
 
         private DataProvider() 
         { 
-            DB = new QuanLyKho3Entities();
+            DB = new QuanLyKho00Entities1();
         }
     }
 }

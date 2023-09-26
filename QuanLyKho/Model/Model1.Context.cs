@@ -13,10 +13,10 @@ namespace QuanLyKho.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QuanLyKho3Entities : DbContext
+    public partial class QuanLyKho00Entities1 : DbContext
     {
-        public QuanLyKho3Entities()
-            : base("name=QuanLyKho3Entities")
+        public QuanLyKho00Entities1()
+            : base("name=QuanLyKho00Entities1")
         {
         }
     
@@ -33,6 +33,7 @@ namespace QuanLyKho.Model
         public virtual DbSet<OutputInfo> OutputInfo { get; set; }
         public virtual DbSet<Promotion> Promotion { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<Users> Users { get; set; }
